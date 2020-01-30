@@ -2,12 +2,15 @@ package it.its.TestDockerService.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -51,6 +54,25 @@ public class DipendentiController {
 		return response;
 		
 	}
+	
+	@GetMapping(value = "/id/{id}", produces = "application/json")
+	public Optional<DipendentiDao> listDipById(@PathVariable("id") Long id) 
+			 
+	{
+		LOGGER.info("****** Otteniamo il dip con Id: " + id + "*******");
+		
+		Optional<DipendentiDao> dip = dipendentiService.selById(id);
+		
+		if (dip == null)
+		{
+			LOGGER.info("DIPENDENTE NON TROVATO");
+		}
+		
+		return dip;
+		
+	}
+	
+	
 	
 
 }

@@ -1,6 +1,7 @@
 package it.its.TestDockerService.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -22,5 +23,12 @@ public class DipendentiServiceImpl implements DipendentiService{
 		
 		return dipendentiRepository.findAll();
 	}
+	
+	@Override
+	public Optional<DipendentiDao> selById(Long id) {
+		return dipendentiRepository.findById(id);
+	}
+	
+	
 
 }
