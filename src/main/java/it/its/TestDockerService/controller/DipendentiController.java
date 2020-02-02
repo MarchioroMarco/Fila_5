@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -109,51 +107,6 @@ public class DipendentiController {
 		responseNode.put("message", "Eliminazione Dipendente " + id + " Eseguita Con Successo!");
 		
 		return new ResponseEntity<>(responseNode, headers, HttpStatus.OK);
-	}
-	
-	@PutMapping(value = "/modifica")
-	public ResponseEntity<DipendentiDao> updateDip(@RequestBody DipendentiDao dip)
-	{
-       LOGGER.info("***** Modifichiamo il dip con id " + dip.getIdDip() + " *****");
-		 
-		 if (dip.getIdDip() > 0)
-		 {
-			 dipendentiService.insDip(dip);
-			 
-			 return new ResponseEntity<DipendentiDao>(new HttpHeaders(), HttpStatus.CREATED);
-		 }
-		 else
-		 {
-			LOGGER.warn("Impossibile modificare un dipendente priva di id! ");
-			 
-			 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		 }
-	}
-	
-	
-	@PostMapping(value = "/inserisci")
-	public ResponseEntity<DipendentiDao> createPromo(@RequestBody DipendentiDao dip)
-	{
-		if (dip.getIdDip() == 0)
-		{
-			Long id = (long) Math.random()+1*10;
-		    
-		    LOGGER.info("***** Creiamo una Promo con id " + id + " *****");
-		    
-		    dip.setId(id);
-		}
-		else
-		{
-			 LOGGER.warn("Impossibile modificare con il metodo POST ");
-			 
-			 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-			 
-			
-		}
-		
-		dipendentiService.insDip(dip);
-		
-		return new ResponseEntity<DipendentiDao>(new HttpHeaders(), HttpStatus.CREATED);
 	}
 	
 
