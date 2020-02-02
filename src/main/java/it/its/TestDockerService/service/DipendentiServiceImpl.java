@@ -34,6 +34,12 @@ public class DipendentiServiceImpl implements DipendentiService{
 		dipendentiRepository.deleteById(id);
 		
 	}
+
+	@Override
+	public void insDip(DipendentiDao dip) {
+		 dipendentiRepository.saveAndFlush(dip);
+		
+	}
 	
 	
 
