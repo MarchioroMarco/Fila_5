@@ -98,7 +98,7 @@ public class DipendentiController {
 		
 		if (dipendenti == null)
 		{
-			LOGGER.warn("Impossibile trovare la promo con id " + id);
+			LOGGER.warn("Impossibile trovare il dipendente con id " + id);
 			
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
@@ -132,23 +132,15 @@ public class DipendentiController {
 	
 	
 	@PostMapping(value = "/inserisci")
-	public ResponseEntity<DipendentiDao> createPromo(@RequestBody DipendentiDao dip)
+	public ResponseEntity<DipendentiDao> createDip(@RequestBody DipendentiDao dip)
 	{
 		if (dip.getIdDip() == 0)
 		{
-			Long id = (long) Math.random()+1*10;
+			Long id = (long) Math.random()*20+1; //PROVVISORIO (Potrebbe eliminare dip già esistenti)
 		    
-		    LOGGER.info("***** Creiamo una Promo con id " + id + " *****");
+		    LOGGER.info("***** Creiamo un dipendente con id " + id + " *****");
 		    
 		    dip.setId(id);
-		}
-		else
-		{
-			 LOGGER.warn("Impossibile modificare con il metodo POST ");
-			 
-			 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-			 
-			
 		}
 		
 		dipendentiService.insDip(dip);
