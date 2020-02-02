@@ -28,6 +28,12 @@ public class DipendentiServiceImpl implements DipendentiService{
 	public Optional<DipendentiDao> selById(Long id) {
 		return dipendentiRepository.findById(id);
 	}
+
+	@Override
+	public void delDip(Long id) {
+		dipendentiRepository.deleteById(id);
+		
+	}
 	
 	
 

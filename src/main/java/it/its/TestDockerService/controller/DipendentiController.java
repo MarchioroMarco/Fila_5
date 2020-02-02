@@ -7,12 +7,19 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import it.its.TestDockerService.dao.DipendentiDao;
 import it.its.TestDockerService.dto.BaseResponseDto;
@@ -73,6 +80,34 @@ public class DipendentiController {
 	}
 	
 	
+	
+	@DeleteMapping(value = "/elimina/{idDip}")
+	public ResponseEntity<?> deleteDip(@PathVariable("id") Long id) 
+	{
+		LOGGER.info("Eliminiamo il dipendente con id " + id);
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		
+		ObjectMapper mapper = new ObjectMapper();
+		ObjectNode responseNode = mapper.createObjectNode();
+		
+		Optional<DipendentiDao> dipendenti = dipendentiService.selById(id);
+		
+		if (dipendenti == null)
+		{
+			LOGGER.warn("Impossibile trovare la promo con id " + id);
+			
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+		
+		dipendentiService.delDip(id);
+		
+		responseNode.put("code", HttpStatus.OK.toString());
+		responseNode.put("message", "Eliminazione Dipendente " + id + " Eseguita Con Successo!");
+		
+		return new ResponseEntity<>(responseNode, headers, HttpStatus.OK);
+	}
 	
 
 }
