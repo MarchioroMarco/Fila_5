@@ -113,22 +113,22 @@ public class DipendentiController {
 	@PostMapping(value = "/inserisci")
 	public ResponseEntity<DipendentiDao> createPromo(@RequestBody DipendentiDao dip)
 	{
-//		if (dip.getId() == 0)
-//		{
-//			Long id = (long) Math.random()+1*10;
-//		    
-//		    LOGGER.info("***** Creiamo una Promo con id " + id + " *****");
-//		    
-//		    dip.setId(id);
-//		}
-//		else
-//		{
-//			 LOGGER.warn("Impossibile modificare con il metodo POST ");
-//			 
-//			 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//			 
-//			
-//		}
+		if (dip.getIdDip() == 0)
+		{
+			Long id = (long) Math.random()+1*10;
+		    
+		    LOGGER.info("***** Creiamo una Promo con id " + id + " *****");
+		    
+		    dip.setId(id);
+		}
+		else
+		{
+			 LOGGER.warn("Impossibile modificare con il metodo POST ");
+			 
+			 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			 
+			
+		}
 		
 		dipendentiService.insDip(dip);
 		
