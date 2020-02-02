@@ -81,7 +81,7 @@ public class DipendentiController {
 	
 	
 	
-	@DeleteMapping(value = "/elimina/{idDip}")
+	@DeleteMapping(value = "/elimina/{id}")
 	public ResponseEntity<?> deleteDip(@PathVariable("id") Long id) 
 	{
 		LOGGER.info("Eliminiamo il dipendente con id " + id);
