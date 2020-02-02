@@ -14,4 +14,6 @@ public interface DipendentiService {
 	public Optional<DipendentiDao> selById(Long id);
 
 	public void delDip(Long id);
+
+	public void insDip(DipendentiDao dip);
 }
