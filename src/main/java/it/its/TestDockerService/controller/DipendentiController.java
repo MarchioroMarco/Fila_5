@@ -44,7 +44,7 @@ public class DipendentiController {
 		BaseResponseDto<List<DipendentiDto>> response = new BaseResponseDto<>();
 		LOGGER.info("******Otteniamo tutto******");
 		
-		List<DipendentiDao> dipendenti = dipendentiService.selTutti();
+		List<DipendentiDto> dipendenti = dipendentiService.parseDto();
 		
 		response.setTimestamp(new Date());
 		response.setStatus(HttpStatus.OK.value());
@@ -57,9 +57,9 @@ public class DipendentiController {
 		
 		LOGGER.info("Numero dei record: " + dipendenti.size());
 		
-		DipendentiDto dto = new DipendentiDto();
-		dto.setDipendentiData(dipendenti);
-		response.setResponse(dto);
+		//DipendentiDto dto = new DipendentiDto();
+		
+		response.setResponse(dipendenti);
 		return response;
 		
 	}
