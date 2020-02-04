@@ -23,7 +23,7 @@ public class FilterCorsConfig implements WebMvcConfigurer
 				registry
 					.addMapping("/**")
 					.allowedOrigins("http://localhost:4200")
-					.allowedMethods("PUT", "DELETE", "GET", "POST", "PATCH")
+					.allowedMethods("PUT", "DELETE", "GET", "POST")
 					.allowedHeaders("*")
 					.exposedHeaders("header1", "header2")
 					.allowCredentials(false)
