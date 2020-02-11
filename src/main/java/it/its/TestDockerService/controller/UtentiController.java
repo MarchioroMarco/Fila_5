@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.its.TestDockerService.dto.BaseResponseDto;
-import it.its.TestDockerService.dto.CittaDto;
 import it.its.TestDockerService.dto.UtentiDto;
-import it.its.TestDockerService.service.CittaService;
 import it.its.TestDockerService.service.UtentiService;
 
 @RestController

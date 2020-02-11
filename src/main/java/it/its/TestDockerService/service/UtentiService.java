@@ -9,4 +9,5 @@ public interface UtentiService {
 
 	public List<UtentiDao> selTutti();
 	public List<UtentiDto> parseDto();
+	
 }
