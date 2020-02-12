@@ -9,5 +9,7 @@ public interface UtentiService {
 
 	public List<UtentiDao> selTutti();
 	public List<UtentiDto> parseDto();
+	public boolean verificaUtente(UtentiDto o);
+	public void insUtente(UtentiDao u);
 	
 }

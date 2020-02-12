@@ -6,11 +6,17 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import it.its.TestDockerService.dao.DipendentiDao;
+import it.its.TestDockerService.dao.UtentiDao;
 import it.its.TestDockerService.dto.BaseResponseDto;
 import it.its.TestDockerService.dto.UtentiDto;
 import it.its.TestDockerService.service.UtentiService;
@@ -45,6 +51,24 @@ public class UtentiController {
 		response.setResponse(utenti);
 		return response;
 		
+	}
+	
+	@PostMapping(value="/trova" )
+	public boolean trovaUtenti(@RequestBody UtentiDto o) {
+		LOGGER.info("******usiamo il metodo trovaUtenti******");
+		boolean trovato = utentiService.verificaUtente(o);
+		LOGGER.info("Trovato : " + trovato);
+		return trovato;
+		
+	}
+	
+	@PostMapping(value = "/inserisci")
+	public ResponseEntity<UtentiDao> createDip(@RequestBody UtentiDao utente)
+	{
+		
+		utentiService.insUtente(utente);
+		
+		return new ResponseEntity<UtentiDao>(new HttpHeaders(), HttpStatus.CREATED);
 	}
 
 }

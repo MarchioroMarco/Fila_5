@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import it.its.TestDockerService.dao.UtentiDao;
 import it.its.TestDockerService.dto.UtentiDto;
 import it.its.TestDockerService.repository.UtentiRepository;
+import lombok.extern.java.Log;
 ////
 @Service
 @Transactional
@@ -32,6 +33,24 @@ public class UtentiServiceImpl implements UtentiService{
 			dto.add(new UtentiDto(d.getId(),d.getUsername(),d.getPassword()));
 		}
 		return dto;
+	}
+
+	@Override
+	public boolean verificaUtente(UtentiDto o) {
+		List<UtentiDto> dto = parseDto();
+		for(UtentiDto d : dto) {
+			if(d.getUsername().equals(o.getUsername())&& d.getPassword().equals(o.getPassword())) {
+				return true;
+		}
+	  }
+		
+		return false;
+	}
+
+	@Override
+	public void insUtente(UtentiDao u) {
+		utentiRepository.saveAndFlush(u);
+		
 	}
 
 }

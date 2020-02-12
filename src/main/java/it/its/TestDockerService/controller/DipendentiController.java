@@ -135,14 +135,6 @@ public class DipendentiController {
 	@PostMapping(value = "/inserisci")
 	public ResponseEntity<DipendentiDao> createDip(@RequestBody DipendentiDao dip)
 	{
-		if (dip.getIdDip() == 0)
-		{
-			Long id = (long) Math.random()*20+1; //PROVVISORIO (Potrebbe eliminare dip già esistenti)
-		    
-		    LOGGER.info("***** Creiamo un dipendente con id " + id + " *****");
-		    
-		    dip.setId(id);
-		}
 		
 		dipendentiService.insDip(dip);
 		
