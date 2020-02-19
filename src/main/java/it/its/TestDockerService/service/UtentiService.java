@@ -9,7 +9,8 @@ public interface UtentiService {
 
 	public List<UtentiDao> selTutti();
 	public List<UtentiDto> parseDto();
-	public boolean verificaUtente(UtentiDto o);
+	public boolean verificaUsername(String username);
+	public boolean verificaPassword(String password);
 	public void insUtente(UtentiDao u);
 	
 }

@@ -56,8 +56,12 @@ public class UtentiController {
 	@PostMapping(value="/trova" )
 	public boolean trovaUtenti(@RequestBody UtentiDto o) {
 		LOGGER.info("******usiamo il metodo trovaUtenti******");
-		boolean trovato = utentiService.verificaUtente(o);
-		LOGGER.info("Trovato : " + trovato);
+		boolean trovato = false;
+		boolean trovatoUser = utentiService.verificaUsername(o.getUsername());
+		boolean trovatoPass = utentiService.verificaPassword(o.getPassword());
+		if(trovatoPass && trovatoUser) {
+			trovato = true; 
+		}
 		return trovato;
 		
 	}

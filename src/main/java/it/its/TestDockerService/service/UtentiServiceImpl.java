@@ -35,11 +35,19 @@ public class UtentiServiceImpl implements UtentiService{
 		return dto;
 	}
 
+
+
 	@Override
-	public boolean verificaUtente(UtentiDto o) {
+	public void insUtente(UtentiDao u) {
+		utentiRepository.saveAndFlush(u);
+		
+	}
+
+	@Override
+	public boolean verificaUsername(String username) {
 		List<UtentiDto> dto = parseDto();
 		for(UtentiDto d : dto) {
-			if(d.getUsername().equals(o.getUsername())&& d.getPassword().equals(o.getPassword())) {
+			if(d.getUsername().equals(username)) {
 				return true;
 		}
 	  }
@@ -48,9 +56,16 @@ public class UtentiServiceImpl implements UtentiService{
 	}
 
 	@Override
-	public void insUtente(UtentiDao u) {
-		utentiRepository.saveAndFlush(u);
+	public boolean verificaPassword(String password) {
+		List<UtentiDto> dto = parseDto();
+		for(UtentiDto d : dto) {
+			if(d.getPassword().equals(password)) {
+				return true;
+		}
+	  }
 		
+		return false;
 	}
+
 
 }
