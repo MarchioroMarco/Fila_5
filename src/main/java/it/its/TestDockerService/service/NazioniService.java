@@ -16,7 +16,7 @@ public List <NazioniDao> selTutti();
 	
 	public HttpStatus all();
 	
-	public HttpStatus name();
+	
 
 	public HttpStatus name(String s);
 	
