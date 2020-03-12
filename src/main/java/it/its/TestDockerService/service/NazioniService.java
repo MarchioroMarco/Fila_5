@@ -16,8 +16,12 @@ public List <NazioniDao> selTutti();
 	
 	public HttpStatus all();
 	
-	
-
 	public HttpStatus name(String s);
+	
+	public HttpStatus code(String s);
+	
+	public HttpStatus currency(String s);
+	
+	public HttpStatus capital(String s);
 	
 }
