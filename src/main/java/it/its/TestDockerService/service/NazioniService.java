@@ -15,4 +15,9 @@ public List <NazioniDao> selTutti();
 	public List<NazioniDto> parseDto();
 	
 	public HttpStatus all();
+	
+	public HttpStatus name();
+
+	public HttpStatus name(String s);
+	
 }

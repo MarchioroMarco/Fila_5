@@ -54,6 +54,22 @@ public class NazioniServiceImpl implements NazioniService{
 		}
 		return responseEntity.getStatusCode();
 	}
+	
+	@Override
+	public HttpStatus name(String s) {
+
+		HttpEntity<String> request = new HttpEntity<String>("https://restcountries.eu/rest/v2/name/" + s + "");
+		RestTemplate restTemplate = new RestTemplate();
+		ResponseEntity<String> responseEntity = restTemplate.exchange("http://localhost:8090/api/nazioni", HttpMethod.GET, request, String.class);
+		responseEntity.getStatusCode();
+		
+		if(responseEntity.getStatusCode().equals(HttpStatus.OK)) {
+		 responseEntity.getBody();
+		}else {
+			return HttpStatus.BAD_REQUEST;
+		}
+		return responseEntity.getStatusCode();
+	}
 
 	
 
