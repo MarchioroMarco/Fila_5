@@ -78,7 +78,7 @@ public class NazioniController {
 	@GetMapping(value= "/currency/{currency}", produces = "application/json")
 	public HttpStatus currency(@PathVariable("currency") String s){
 		
-		HttpStatus response = nazioniService.code(s);
+		HttpStatus response = nazioniService.currency(s);
 		return response;
 		
 	}
@@ -86,7 +86,7 @@ public class NazioniController {
 	@GetMapping(value= "/capital/{capital}", produces = "application/json")
 	public HttpStatus capital(@PathVariable("capital") String s){
 		
-		HttpStatus response = nazioniService.code(s);
+		HttpStatus response = nazioniService.capital(s);
 		return response;
 		
 	}
