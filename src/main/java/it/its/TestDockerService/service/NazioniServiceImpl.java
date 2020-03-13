@@ -42,9 +42,9 @@ public class NazioniServiceImpl implements NazioniService{
 	@Override
 	public HttpStatus all() {
 
-		HttpEntity<String> request = new HttpEntity<String>("https://restcountries.eu/rest/v2/all");
+		HttpEntity<String> request = new HttpEntity<String>("");
 		RestTemplate restTemplate = new RestTemplate();
-		ResponseEntity<String> responseEntity = restTemplate.exchange("http://localhost:8090/api/nazioni", HttpMethod.GET, request, String.class);
+		ResponseEntity<String> responseEntity = restTemplate.exchange("https://restcountries.eu/rest/v2/all", HttpMethod.GET, request, String.class);
 		responseEntity.getStatusCode();
 		
 		if(responseEntity.getStatusCode().equals(HttpStatus.OK)) {
@@ -58,9 +58,9 @@ public class NazioniServiceImpl implements NazioniService{
 	@Override
 	public HttpStatus name(String s) {
 
-		HttpEntity<String> request = new HttpEntity<String>("https://restcountries.eu/rest/v2/name/" + s + "");
+		HttpEntity<String> request = new HttpEntity<String>("");
 		RestTemplate restTemplate = new RestTemplate();
-		ResponseEntity<String> responseEntity = restTemplate.exchange("http://localhost:8090/api/nazioni", HttpMethod.GET, request, String.class);
+		ResponseEntity<String> responseEntity = restTemplate.exchange("https://restcountries.eu/rest/v2/name/" + s + "", HttpMethod.GET, request, String.class);
 		responseEntity.getStatusCode();
 		
 		if(responseEntity.getStatusCode().equals(HttpStatus.OK)) {
@@ -73,9 +73,9 @@ public class NazioniServiceImpl implements NazioniService{
 
 	@Override
 	public HttpStatus code(String c) {
-		HttpEntity<String> request = new HttpEntity<String>("https://restcountries.eu/rest/v2/alpha/" + c + "");
+		HttpEntity<String> request = new HttpEntity<String>("");
 		RestTemplate restTemplate = new RestTemplate();
-		ResponseEntity<String> responseEntity = restTemplate.exchange("http://localhost:8090/api/nazioni", HttpMethod.GET, request, String.class);
+		ResponseEntity<String> responseEntity = restTemplate.exchange("https://restcountries.eu/rest/v2/alpha/" + c + "", HttpMethod.GET, request, String.class);
 		responseEntity.getStatusCode();
 		
 		if(responseEntity.getStatusCode().equals(HttpStatus.OK)) {
@@ -88,9 +88,9 @@ public class NazioniServiceImpl implements NazioniService{
 
 	@Override
 	public HttpStatus currency(String s) {
-		HttpEntity<String> request = new HttpEntity<String>("https://restcountries.eu/rest/v2/currency/" + s + "");
+		HttpEntity<String> request = new HttpEntity<String>("");
 		RestTemplate restTemplate = new RestTemplate();
-		ResponseEntity<String> responseEntity = restTemplate.exchange("http://localhost:8090/api/nazioni", HttpMethod.GET, request, String.class);
+		ResponseEntity<String> responseEntity = restTemplate.exchange("https://restcountries.eu/rest/v2/currency/" + s + "", HttpMethod.GET, request, String.class);
 		responseEntity.getStatusCode();
 		
 		if(responseEntity.getStatusCode().equals(HttpStatus.OK)) {
@@ -103,9 +103,9 @@ public class NazioniServiceImpl implements NazioniService{
 
 	@Override
 	public HttpStatus capital(String s) {
-		HttpEntity<String> request = new HttpEntity<String>("https://restcountries.eu/rest/v2/capital/" + s + "");
+		HttpEntity<String> request = new HttpEntity<String>("");
 		RestTemplate restTemplate = new RestTemplate();
-		ResponseEntity<String> responseEntity = restTemplate.exchange("http://localhost:8090/api/nazioni", HttpMethod.GET, request, String.class);
+		ResponseEntity<String> responseEntity = restTemplate.exchange("https://restcountries.eu/rest/v2/capital/" + s + "", HttpMethod.GET, request, String.class);
 		responseEntity.getStatusCode();
 		
 		if(responseEntity.getStatusCode().equals(HttpStatus.OK)) {
