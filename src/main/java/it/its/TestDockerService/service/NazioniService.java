@@ -24,4 +24,6 @@ public List <NazioniDao> selTutti();
 	
 	public HttpStatus capital(String s);
 	
+	public List<NazioniDto> getAll();
+	
 }

@@ -51,13 +51,13 @@ public class NazioniController {
 		
 	}
 	
-	@GetMapping(value= "/all", produces = "application/json")
-	public HttpStatus tutte(){
-		
-		HttpStatus response = nazioniService.all();
-		return response;
-		
-	}
+//	@GetMapping(value= "/all", produces = "application/json")
+//	public HttpStatus tutte(){
+//		
+//		HttpStatus response = nazioniService.all();
+//		return response;
+//		
+//	}
 	
 	@GetMapping(value= "/name/{name}", produces = "application/json")
 	public HttpStatus name(@PathVariable("name") String s){
@@ -91,5 +91,11 @@ public class NazioniController {
 		
 	}
 	
-	
+	@GetMapping(value= "/all", produces = "application/json")
+	public List<NazioniDto> getAll(){
+		
+		List<NazioniDto> response = nazioniService.getAll();
+		return response;
+		
+	}
 }

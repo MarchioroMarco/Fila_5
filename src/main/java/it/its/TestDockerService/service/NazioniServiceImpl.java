@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -114,6 +116,31 @@ public class NazioniServiceImpl implements NazioniService{
 			return HttpStatus.BAD_REQUEST;
 		}
 		return responseEntity.getStatusCode();
+	}
+
+	@Override
+	public List<NazioniDto> getAll() {
+		
+		List<NazioniDto> risposta = new ArrayList<NazioniDto>();
+		
+		HttpEntity<String> request = new HttpEntity<String>("");
+		RestTemplate restTemplate = new RestTemplate();
+		ResponseEntity<String> responseEntity = restTemplate.exchange("https://restcountries.eu/rest/v2/all?fields=name;alpha2Code;", HttpMethod.GET, request, String.class);
+		responseEntity.getStatusCode();
+		
+		if(responseEntity.getStatusCode().equals(HttpStatus.OK)) {
+			System.out.println(responseEntity.getBody());
+		 JSONArray nazioni = new JSONArray(responseEntity.getBody());
+		 for (Object naz : nazioni) {
+			JSONObject nazione = new JSONObject(naz.toString());
+			NazioniDto dto = new NazioniDto(nazione.getString("alpha2Code"), nazione.getString("name"));
+			risposta.add(dto);
+		}
+		 return risposta;
+		 
+		}else {
+			return null;
+		}
 	}
 
 	
