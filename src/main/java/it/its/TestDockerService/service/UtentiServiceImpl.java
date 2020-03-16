@@ -30,7 +30,7 @@ public class UtentiServiceImpl implements UtentiService{
 		List<UtentiDto> dto = new ArrayList<UtentiDto>();
 		List<UtentiDao> dao = this.selTutti();
 		for (UtentiDao d : dao) {
-			dto.add(new UtentiDto(d.getId(),d.getUsername(),d.getPassword()));
+			dto.add(new UtentiDto(d.getId(),d.getUsername(),d.getPassword(), d.getRuolo()));
 		}
 		return dto;
 	}
