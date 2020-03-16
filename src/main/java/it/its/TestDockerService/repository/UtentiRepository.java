@@ -8,5 +8,5 @@ import it.its.TestDockerService.dao.UtentiDao;
 
 public interface UtentiRepository extends JpaRepository<UtentiDao, Long>{
 
-	Optional<UtentiDao> findByName(String username);
+	Optional<UtentiDao> findByUsername(String username);
 }
