@@ -21,6 +21,9 @@ public class UtentiDao {
 	
 	@Column(name = "passw")
 	private String password;
+	
+	@Column(name = "ruolo")
+	private String ruolo;
 
 	
 }
