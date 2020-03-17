@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -37,6 +38,7 @@ public class AuthController {
     UtentiRepository users;
 
     @PostMapping("/signin")
+//    @PreAuthorize("ADMIN")
     public BaseResponseDto<AuthenticationResponseDto> signin(@Valid @RequestBody AuthenticationRequestDto data) {
 
     	BaseResponseDto<AuthenticationResponseDto> response = new BaseResponseDto<AuthenticationResponseDto>();
