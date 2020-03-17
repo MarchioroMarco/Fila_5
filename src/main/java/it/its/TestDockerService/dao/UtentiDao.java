@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import lombok.Data;
 
@@ -31,6 +33,8 @@ public class UtentiDao implements UserDetails{
 	
 	@Column(name = "passw")
 	private String password;
+	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); 
+	String encodedPassword = passwordEncoder.encode(password);
 	
 	@Column(name = "ruolo")
 	private String ruolo;
