@@ -12,6 +12,6 @@ public interface UtentiService {
 	public boolean verificaUsername(String username);
 	public boolean verificaPassword(String password);
 	public void insUtente(UtentiDao u);
-	public void criptaPass();
+	void criptaPass(UtentiDao u);
 	
 }

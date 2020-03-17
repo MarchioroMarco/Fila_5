@@ -32,6 +32,7 @@ public class UtentiServiceImpl implements UtentiService{
 		List<UtentiDto> dto = new ArrayList<UtentiDto>();
 		List<UtentiDao> dao = this.selTutti();
 		for (UtentiDao d : dao) {
+			criptaPass(d);
 			dto.add(new UtentiDto(d.getId(),d.getUsername(),d.getPassword(), d.getRuolo()));
 		}
 		return dto;
@@ -70,15 +71,16 @@ public class UtentiServiceImpl implements UtentiService{
 	}
 
 	@Override
-	public void criptaPass() {
-		List<UtentiDao> dao = this.selTutti();
-		for(UtentiDao d : dao) {
-			PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-			String encodedPassword = passwordEncoder.encode(d.getPassword());
-			d.setPassword(encodedPassword);
-		}
+	public void criptaPass(UtentiDao u) {
+		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String encodedPassword = passwordEncoder.encode(u.getPassword());
+		u.setPassword(encodedPassword);
 		
 	}
+
+
+		
+	
 
 
 }
