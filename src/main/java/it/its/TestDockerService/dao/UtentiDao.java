@@ -33,8 +33,6 @@ public class UtentiDao implements UserDetails{
 	
 	@Column(name = "passw")
 	private String password;
-	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); 
-	String encodedPassword = passwordEncoder.encode(password);
 	
 	@Column(name = "ruolo")
 	private String ruolo;

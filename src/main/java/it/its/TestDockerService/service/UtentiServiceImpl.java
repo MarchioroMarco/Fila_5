@@ -6,6 +6,8 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import it.its.TestDockerService.dao.UtentiDao;
@@ -30,6 +32,9 @@ public class UtentiServiceImpl implements UtentiService{
 		List<UtentiDto> dto = new ArrayList<UtentiDto>();
 		List<UtentiDao> dao = this.selTutti();
 		for (UtentiDao d : dao) {
+			PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+			String encodedPassword = passwordEncoder.encode(d.getPassword());
+			d.setPassword(encodedPassword);
 			dto.add(new UtentiDto(d.getId(),d.getUsername(),d.getPassword(), d.getRuolo()));
 		}
 		return dto;
