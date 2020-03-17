@@ -35,6 +35,8 @@ public class UtentiServiceImpl implements UtentiService{
 			PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 			String encodedPassword = passwordEncoder.encode(d.getPassword());
 			d.setPassword(encodedPassword);
+			
+			//
 			dto.add(new UtentiDto(d.getId(),d.getUsername(),d.getPassword(), d.getRuolo()));
 		}
 		return dto;
