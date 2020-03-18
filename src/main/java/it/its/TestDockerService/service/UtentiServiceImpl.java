@@ -32,7 +32,6 @@ public class UtentiServiceImpl implements UtentiService{
 		List<UtentiDto> dto = new ArrayList<UtentiDto>();
 		List<UtentiDao> dao = this.selTutti();
 		for (UtentiDao d : dao) {
-			criptaPass(d);
 			dto.add(new UtentiDto(d.getId(),d.getUsername(),d.getPassword(), d.getRuolo()));
 		}
 		return dto;
@@ -42,6 +41,7 @@ public class UtentiServiceImpl implements UtentiService{
 
 	@Override
 	public void insUtente(UtentiDao u) {
+		criptaPass(u);
 		utentiRepository.saveAndFlush(u);
 		
 	}
