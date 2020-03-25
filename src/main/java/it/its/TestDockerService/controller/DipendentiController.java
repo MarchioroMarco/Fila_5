@@ -66,7 +66,7 @@ public class DipendentiController {
 		
 	}
 	
-	@GetMapping(value = "/id/{id}", produces = "application/json")
+	@GetMapping(value = "/idList/{id}", produces = "application/json")
 	public List<Optional<DipendentiDao>> listDipById(@PathVariable("id") Long id) 
 			 
 	{
@@ -81,6 +81,23 @@ public class DipendentiController {
 		
 		return lista;
 		//prova push
+		
+	}
+	
+	@GetMapping(value = "/id/{id}", produces = "application/json")
+	public Optional<DipendentiDao> DipById(@PathVariable("id") Long id) 
+			 
+	{
+		LOGGER.info("****** Otteniamo il dip con Id: " + id + "*******");
+		
+		Optional<DipendentiDao> dip = dipendentiService.selById(id);
+		
+		if (dip == null)
+		{
+			LOGGER.info("DIPENDENTE NON TROVATO");
+		}
+		
+		return dip;
 		
 	}
 	
