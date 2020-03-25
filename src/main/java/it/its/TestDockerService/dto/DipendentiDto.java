@@ -13,6 +13,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DipendentiDto {
-
-	private List<DipendentiDao> dipendentiData;
+	//NON CI DEVE ESSERE 
+//	private List<DipendentiDao> dipendentiData;
+	
+	private Long id;
+	private String nome;
+	private String cognome;
+	private String tax_code;
+	private String indirizzo;
+	private String sesso;
+	private String email;
+	private String telefono;
 }

@@ -15,7 +15,7 @@ public class ProvinceDao {
 
 	@Id
 	@Column(name = "id")
-	private Long id;
+	private String id;
 	
 	@Column(name = "descrizione")
 	private String descrizione;

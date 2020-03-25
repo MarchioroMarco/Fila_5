@@ -1,5 +1,7 @@
 package it.its.TestDockerService.dao;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -36,5 +38,7 @@ public class DipendentiDao{
 	@Column(name = "telefono")
 	private String telefono;
 	
-	
+	public Long getIdDip() {
+		return id;
+	}
 }

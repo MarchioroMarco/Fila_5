@@ -1,3 +1,4 @@
+
 package it.its.TestDockerService;
 
 import org.springframework.context.annotation.Bean;
@@ -22,7 +23,7 @@ public class FilterCorsConfig implements WebMvcConfigurer
 				
 				registry
 					.addMapping("/**")
-					.allowedOrigins("*")
+					.allowedOrigins("http://localhost:4200")
 					.allowedMethods("PUT", "DELETE", "GET", "POST")
 					.allowedHeaders("*")
 					.exposedHeaders("header1", "header2")
