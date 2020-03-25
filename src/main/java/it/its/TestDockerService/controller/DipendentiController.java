@@ -1,5 +1,6 @@
 package it.its.TestDockerService.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -66,19 +67,19 @@ public class DipendentiController {
 	}
 	
 	@GetMapping(value = "/id/{id}", produces = "application/json")
-	public Optional<DipendentiDao> listDipById(@PathVariable("id") Long id) 
+	public List<Optional<DipendentiDao>> listDipById(@PathVariable("id") Long id) 
 			 
 	{
 		LOGGER.info("****** Otteniamo il dip con Id: " + id + "*******");
 		
-		Optional<DipendentiDao> dip = dipendentiService.selById(id);
+		List<Optional<DipendentiDao>> lista = dipendentiService.parseOptional(id);
 		
-		if (dip == null)
+		if (lista == null)
 		{
 			LOGGER.info("DIPENDENTE NON TROVATO");
 		}
 		
-		return dip;
+		return lista;
 		
 	}
 	
@@ -141,5 +142,5 @@ public class DipendentiController {
 		return new ResponseEntity<DipendentiDao>(new HttpHeaders(), HttpStatus.CREATED);
 	}
 	
-//cambia
+
 }

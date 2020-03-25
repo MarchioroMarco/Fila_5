@@ -53,6 +53,17 @@ public class DipendentiServiceImpl implements DipendentiService{
 		return dto;
 	}
 
+	@Override
+	public List<Optional<DipendentiDao>> parseOptional(Long id) {
+		List<Optional<DipendentiDao>> lista = new ArrayList<Optional<DipendentiDao>>();
+		Optional dip = this.selById(id);
+		lista.add(dip);
+		List<Optional<DipendentiDto>> listaDto = new ArrayList<Optional<DipendentiDto>>();
+		return lista;
+	}
+
+	
+
 	
 	
 
