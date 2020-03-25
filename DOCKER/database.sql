@@ -60,7 +60,7 @@ DROP TABLE IF EXISTS utenti;
 create table utenti (
 id int not null AUTO_INCREMENT PRIMARY KEY, 
 username varchar(50),
-passw varchar(50), 
+passw varchar(200), 
 ruolo varchar(100)
 );
 
