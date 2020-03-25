@@ -55,6 +55,20 @@ CREATE TABLE dipendenti(
   FOREIGN KEY (id_provincia) REFERENCES province(id),
   FOREIGN KEY (id_citta) REFERENCES citta(id)
 );
+
+DROP TABLE IF EXISTS utenti;
+create table utenti (
+id int not null AUTO_INCREMENT PRIMARY KEY, 
+username varchar(50),
+passw varchar(50), 
+ruolo varchar(100)
+);
+
+insert into utenti values (null,'adrian_manuc','Utente1','admin');
+insert into utenti values (null,'armin_saliu','Utente2','ADMIN');
+insert into utenti values (null,'ferro_cristina','Utente3','ADMIN');
+insert into utenti values (null,'marchioro_marco','Utente4','ADMIN');
+insert into utenti values (null,'michael_brotto','Utente5','ADMIN');
 INSERT INTO nazioni VALUES ('IT', 'Italia');
 INSERT INTO nazioni VALUES ('FR', 'Francia');
 INSERT INTO nazioni VALUES ('SP', 'Spagna');
