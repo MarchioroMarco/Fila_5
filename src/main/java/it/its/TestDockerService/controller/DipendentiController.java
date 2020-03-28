@@ -29,136 +29,128 @@ import it.its.TestDockerService.dao.DipendentiDao;
 import it.its.TestDockerService.dto.BaseResponseDto;
 import it.its.TestDockerService.dto.DipendentiDto;
 import it.its.TestDockerService.service.DipendentiService;
+
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(value = "api/dipendenti")
 //pushatelo raga
 public class DipendentiController {
-	
+
 	@Autowired
 	private DipendentiService dipendentiService;
-	
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(DipendentiController.class);
-	
+
 	@GetMapping(produces = "application/json")
-	public BaseResponseDto<List<DipendentiDto>> fetchAll(){
-		
+	public BaseResponseDto<List<DipendentiDto>> fetchAll() {
+
 		BaseResponseDto<List<DipendentiDto>> response = new BaseResponseDto<>();
 		LOGGER.info("******Otteniamo tutto******");
-		
+
 		List<DipendentiDto> dipendenti = dipendentiService.parseDto();
-		
+
 		response.setTimestamp(new Date());
 		response.setStatus(HttpStatus.OK.value());
 		response.setMessagge("SERVIZIO_ELABORATO_CORRETTAMENTE");
-		
-		if(dipendenti.isEmpty()) {
+
+		if (dipendenti.isEmpty()) {
 			response.setResponse(null);
 			return response;
 		}
-		
+
 		LOGGER.info("Numero dei record: " + dipendenti.size());
-		
-		//DipendentiDto dto = new DipendentiDto();
-		
+
+		// DipendentiDto dto = new DipendentiDto();
+
 		response.setResponse(dipendenti);
 		return response;
-		
+
 	}
-	
+
 	@GetMapping(value = "/idList/{id}", produces = "application/json")
-	public List<Optional<DipendentiDao>> listDipById(@PathVariable("id") Long id) 
-			 
+	public BaseResponseDto<?> listDipById(@PathVariable("id") Long id)
+
 	{
+		BaseResponseDto<?> response = new BaseResponseDto<>();
 		LOGGER.info("****** Otteniamo il dip con Id: " + id + "*******");
-		
+
 		List<Optional<DipendentiDao>> lista = dipendentiService.parseOptional(id);
-		
-		if (lista == null)
-		{
-			LOGGER.info("DIPENDENTE NON TROVATO");
+		if (lista == null) {
+			response.setResponse(null);
+			response.setMessagge("NON_TROVO_IL_DIPENDENTE");
+			return response;
 		}
-		
-		return lista;
-		//prova push
-		
+		response.setTimestamp(new Date());
+		response.setStatus(HttpStatus.OK.value());
+		response.setMessagge("SERVIZIO_ELABORATO_CORRETTAMENTE");
+		response.setResponse(lista);
+		return response;
+
 	}
-	
+
 	@GetMapping(value = "/id/{id}", produces = "application/json")
-	public Optional<DipendentiDao> DipById(@PathVariable("id") Long id) 
-			 
+	public Optional<DipendentiDao> DipById(@PathVariable("id") Long id)
+
 	{
 		LOGGER.info("****** Otteniamo il dip con Id: " + id + "*******");
-		
+
 		Optional<DipendentiDao> dip = dipendentiService.selById(id);
-		
-		if (dip == null)
-		{
+
+		if (dip == null) {
 			LOGGER.info("DIPENDENTE NON TROVATO");
 		}
-		
+
 		return dip;
-		
+
 	}
-	
-	
-	
+
 	@DeleteMapping(value = "/elimina/{id}")
-	public ResponseEntity<?> deleteDip(@PathVariable("id") Long id) 
-	{
+	public ResponseEntity<?> deleteDip(@PathVariable("id") Long id) {
 		LOGGER.info("Eliminiamo il dipendente con id " + id);
-		
+
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
-		
+
 		ObjectMapper mapper = new ObjectMapper();
 		ObjectNode responseNode = mapper.createObjectNode();
-		
+
 		Optional<DipendentiDao> dipendenti = dipendentiService.selById(id);
-		
-		if (dipendenti == null)
-		{
+
+		if (dipendenti == null) {
 			LOGGER.warn("Impossibile trovare il dipendente con id " + id);
-			
+
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
-		
+
 		dipendentiService.delDip(id);
-		
+
 		responseNode.put("code", HttpStatus.OK.toString());
 		responseNode.put("message", "Eliminazione Dipendente " + id + " Eseguita Con Successo!");
-		
+
 		return new ResponseEntity<>(responseNode, headers, HttpStatus.OK);
 	}
-	
+
 	@PutMapping(value = "/modifica")
-	public ResponseEntity<DipendentiDao> updateDip(@RequestBody DipendentiDao dip)
-	{
-       LOGGER.info("***** Modifichiamo il dip con id " + dip.getIdDip() + " *****");
-		 
-		 if (dip.getIdDip() > 0)
-		 {
-			 dipendentiService.insDip(dip);
-			 
-			 return new ResponseEntity<DipendentiDao>(new HttpHeaders(), HttpStatus.CREATED);
-		 }
-		 else
-		 {
+	public ResponseEntity<DipendentiDao> updateDip(@RequestBody DipendentiDao dip) {
+		LOGGER.info("***** Modifichiamo il dip con id " + dip.getIdDip() + " *****");
+
+		if (dip.getIdDip() > 0) {
+			dipendentiService.insDip(dip);
+
+			return new ResponseEntity<DipendentiDao>(new HttpHeaders(), HttpStatus.CREATED);
+		} else {
 			LOGGER.warn("Impossibile modificare un dipendente priva di id! ");
-			 
-			 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		 }
+
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 	}
-	
-	
+
 	@PostMapping(value = "/inserisci")
-	public ResponseEntity<DipendentiDao> createDip(@RequestBody DipendentiDao dip)
-	{
-		
+	public ResponseEntity<DipendentiDao> createDip(@RequestBody DipendentiDao dip) {
+
 		dipendentiService.insDip(dip);
-		
+
 		return new ResponseEntity<DipendentiDao>(new HttpHeaders(), HttpStatus.CREATED);
 	}
-	
 
 }

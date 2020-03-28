@@ -58,7 +58,6 @@ public class DipendentiServiceImpl implements DipendentiService{
 		List<Optional<DipendentiDao>> lista = new ArrayList<Optional<DipendentiDao>>();
 		Optional dip = this.selById(id);
 		lista.add(dip);
-		List<Optional<DipendentiDto>> listaDto = new ArrayList<Optional<DipendentiDto>>();
 		return lista;
 	}
 
